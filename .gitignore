@@ -41,5 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 # certificate
-certificate.cer
-*.pem
+# certificate.cer
+# *.pem
