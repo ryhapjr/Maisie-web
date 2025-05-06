@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import queryString from 'query-string';
 import { useSearchParams } from 'next/navigation';
 import { useLocalstorage } from '@/hooks/useLocalstorage';
@@ -180,4 +180,12 @@ const LaunchPage = () => {
   );
 };
 
-export default LaunchPage;
+const LaunchPageMain = () => {
+  return (
+    <Suspense>
+      <LaunchPage />
+    </Suspense>
+  );
+};
+
+export default LaunchPageMain;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 const Callback = () => {
@@ -17,4 +17,12 @@ const Callback = () => {
   return <p>Redirecting...</p>;
 };
 
-export default Callback;
+const CallbackMain = () => {
+  return (
+    <Suspense>
+      <Callback />
+    </Suspense>
+  );
+};
+
+export default CallbackMain;
