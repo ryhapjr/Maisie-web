@@ -68,17 +68,17 @@ export async function GET(request: Request) {
   // console.log('patientId', patientId);
 
   const httpsAgent = new https.Agent({
-    // cert,
-    // key, // Use the correct key
+    cert,
+    key: cert, // Use the correct key
     // rejectUnauthorized: false, // Enforce certificate validation in production
-    ca: cert, //[fs.readFileSync(CERT_PATH)],
+    // ca: cert, //[fs.readFileSync(CERT_PATH)],
   });
   axios.defaults.httpAgent = httpsAgent;
 
   const requestOptions = {
     headers: {
       Authorization: `Bearer ${accessToken}`,
-      Accept: 'application/json',
+      // Accept: 'application/json',
     },
     httpsAgent,
   };
