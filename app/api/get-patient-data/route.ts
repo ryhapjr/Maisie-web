@@ -6,7 +6,7 @@ import fs from 'fs';
 
 const CERT_PATH = path.join(process.cwd(), 'cert.pem');
 
-const KEY_PATH = path.join(process.cwd(), 'private.pem');
+const KEY_PATH = path.join(process.cwd(), 'private.key');
 
 /**
  * @swagger
@@ -64,7 +64,7 @@ export async function GET(request: Request) {
   const key = fs.readFileSync(KEY_PATH);
 
   console.log('cert', cert);
-  // console.log('key', key);
+  console.log('key', key);
   // console.log('iss', iss);
   // console.log('accessToken', accessToken);
   // console.log('patientId', patientId);
@@ -75,12 +75,12 @@ export async function GET(request: Request) {
     rejectUnauthorized: false, // Enforce certificate validation in production
     requestCert: true,
   });
-  axios.defaults.httpAgent = httpsAgent;
+  // axios.defaults.httpAgent = httpsAgent;
 
   const requestOptions = {
     headers: {
       Authorization: `Bearer ${accessToken}`,
-      Accept: 'application/json',
+      // Accept: 'application/json',
     },
     httpsAgent,
   };
