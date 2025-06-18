@@ -16,7 +16,7 @@ const LaunchPage = () => {
   const [fhirData, setFhirData] = useState<any>(null);
 
   const clientId = 'W1e8YCDAKt1oj6UdPefXwSpNs9hT6eca'; // Replace with your client ID
-  const redirectUri = 'https://maisieservices.com/launch'; //'http://localhost:3000/callback'; // Replace
+  const redirectUri = 'https://growing-loudly-elk.ngrok-free.app/launch'; //'http://localhost:3000/callback'; // Replace
   const scopes = [
     'openid',
     'fhirUser',

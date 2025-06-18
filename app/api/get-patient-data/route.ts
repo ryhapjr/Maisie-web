@@ -46,6 +46,8 @@ export async function GET(request: Request) {
   const accessToken = searchParams.get('accessToken');
   const iss = searchParams.get('iss');
 
+  console.log({ patientId, accessToken, iss });
+
   if (!patientId) {
     return NextResponse.json(
       { error: 'Patient ID is required' },
@@ -69,16 +71,18 @@ export async function GET(request: Request) {
 
   const httpsAgent = new https.Agent({
     cert,
-    key: cert, // Use the correct key
-    // rejectUnauthorized: false, // Enforce certificate validation in production
+    // ca: cert,
+    // key: cert, // Use the correct key
+    rejectUnauthorized: false, // Enforce certificate validation in production
     // ca: cert, //[fs.readFileSync(CERT_PATH)],
+    requestCert: true,
   });
   axios.defaults.httpAgent = httpsAgent;
 
   const requestOptions = {
     headers: {
       Authorization: `Bearer ${accessToken}`,
-      // Accept: 'application/json',
+      Accept: 'application/json',
     },
     httpsAgent,
   };
