@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       queryString.stringify({
         code,
         grant_type: 'authorization_code',
-        redirect_uri: 'https://growing-loudly-elk.ngrok-free.app/launch',
+        redirect_uri: 'https://maisieservices.com/launch',
         client_id: process.env.PCC_CLIENT_ID,
         client_secret: process.env.PCC_CLIENT_SECRET,
       }),
