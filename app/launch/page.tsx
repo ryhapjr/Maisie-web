@@ -117,6 +117,7 @@ const LaunchPage = () => {
       });
 
       const tokenData = tokenResponse.data;
+      console.log(JSON.stringify(tokenData, null, 2));
       setPatientId(tokenData.patient); // Assuming patient ID is in the token response
 
       setAccessToken(tokenData.access_token);

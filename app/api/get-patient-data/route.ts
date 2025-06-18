@@ -42,9 +42,11 @@ const KEY_PATH = path.join(process.cwd(), 'private.key');
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const patientId = searchParams.get('patientId');
+  const patientId = '6f931546-92c8-41d6-9da4-e59cc5926726-117439'; //searchParams.get('patientId');
   const accessToken = searchParams.get('accessToken');
-  const iss = searchParams.get('iss');
+  let iss = searchParams.get('iss');
+
+  iss = iss?.replace('connect', 'connect2') || '';
 
   console.log({ patientId, accessToken, iss });
 
