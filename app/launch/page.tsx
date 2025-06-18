@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import { useSearchParams } from 'next/navigation';
 import { useLocalstorage } from '@/hooks/useLocalstorage';
 import axios from 'axios';
+import { extractConditions } from '@/lib/extractor';
 
 const LaunchPage = () => {
   const searchParams = useSearchParams();
@@ -174,7 +175,16 @@ const LaunchPage = () => {
           {fhirData && (
             <div>
               <h2>Patient Data</h2>
-              <pre>{JSON.stringify(fhirData, null, 2)}</pre>
+              {/* <pre>{JSON.stringify(fhirData, null, 2)}</pre> */}
+
+              <h3>Conditions</h3>
+              <ul>
+                {extractConditions(fhirData?.conditions?.entry || []).map(
+                  (condition) => (
+                    <li key={condition.code}>{condition.display}</li>
+                  )
+                )}
+              </ul>
             </div>
           )}
         </div>
