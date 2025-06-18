@@ -74,7 +74,7 @@ export async function GET(request: Request) {
   const httpsAgent = new https.Agent({
     cert,
     key, // Use the correct key
-    rejectUnauthorized: false, // Enforce certificate validation in production
+    rejectUnauthorized: true, // Enforce certificate validation in production
     requestCert: true,
   });
   // axios.defaults.httpAgent = httpsAgent;
@@ -94,23 +94,23 @@ export async function GET(request: Request) {
       requestOptions
     );
 
-    // Get conditions/diagnoses
-    const { data: conditions } = await axios.get(
-      `${iss}/Condition?patient=${patientId}`,
-      requestOptions
-    );
+    // // Get conditions/diagnoses
+    // const { data: conditions } = await axios.get(
+    //   `${iss}/Condition?patient=${patientId}`,
+    //   requestOptions
+    // );
 
-    // Get allergies
-    const { data: allergies } = await axios.get(
-      `${iss}/AllergyIntolerance?patient=${patientId}`,
-      requestOptions
-    );
+    // // Get allergies
+    // const { data: allergies } = await axios.get(
+    //   `${iss}/AllergyIntolerance?patient=${patientId}`,
+    //   requestOptions
+    // );
 
-    // Get care plan info including precautions
-    const { data: carePlan } = await axios.get(
-      `${iss}/CarePlan?patient=${patientId}`,
-      requestOptions
-    );
+    // // Get care plan info including precautions
+    // const { data: carePlan } = await axios.get(
+    //   `${iss}/CarePlan?patient=${patientId}`,
+    //   requestOptions
+    // );
 
     // Transform FHIR resources into our expected format
     // const patientData = {
@@ -138,9 +138,9 @@ export async function GET(request: Request) {
 
     const patientData = {
       patient,
-      conditions,
-      allergies,
-      carePlan,
+      // conditions,
+      // allergies,
+      // carePlan,
       resident_id: patientId,
     };
 
