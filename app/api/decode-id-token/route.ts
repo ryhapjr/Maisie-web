@@ -21,7 +21,10 @@ export async function POST(request: Request) {
     const patientId = decodedToken?.fhirUser?.split('/')?.pop(); // Get the last segment of the fhirUser URL
 
     if (patientId) {
-      return NextResponse.json({ patientId: patientId }, { status: 200 });
+      return NextResponse.json(
+        { patientId: patientId, decodedToken },
+        { status: 200 }
+      );
     } else {
       return NextResponse.json(
         { error: 'Patient ID not found in ID token' },
