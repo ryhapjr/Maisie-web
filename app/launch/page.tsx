@@ -33,6 +33,7 @@ const LaunchPage = () => {
   const [authUrl, setAuthUrl] = useLocalstorage('authUrl', ''); // Authorization URL
   const [tokenUrl, setTokenUrl] = useLocalstorage('tokenUrl', ''); // Token URL
   const [iss, setIss] = useLocalstorage('iss', ''); // ISS URL
+  const [carePlan, setCarePlan] = useState<any>(null);
 
   console.log('tokenUrl', tokenUrl);
 
@@ -134,6 +135,12 @@ const LaunchPage = () => {
     }
   };
 
+  const generateCarePlan = async (body: any) => {
+    const { data } = await axios.post('/api/generate', body);
+    console.log('generateCarePlan', data);
+    return data;
+  };
+
   const fetchFhirData = async () => {
     // Example: Fetch Patient data
     if (accessToken && patientId && iss) {
@@ -150,6 +157,14 @@ const LaunchPage = () => {
         });
 
         setFhirData(patientData);
+        const carePlan = await generateCarePlan({
+          diagnoses: extractConditions(patientData?.conditions?.entry || []),
+          allergies: patientData?.allergies?.entry || [],
+          carePlan: patientData?.carePlan?.entry || [],
+          resident_id: patientData?.resident_id,
+        });
+        console.log('carePlan', carePlan);
+        setCarePlan(carePlan);
       } catch (error) {
         console.error('Error fetching FHIR data:', error);
       }
@@ -185,6 +200,9 @@ const LaunchPage = () => {
                   )
                 )}
               </ul>
+
+              <h3>Care Plan</h3>
+              {carePlan && <pre>{JSON.stringify(carePlan, null, 2)}</pre>}
             </div>
           )}
         </div>

@@ -28,17 +28,10 @@ import { NextResponse } from 'next/server';
  *         description: The care plan ID
  */
 
-export async function POST(_request: Request) {
-  const sampleData = {
-    resident_id: '12345',
-    code_status: 'DNR',
-    allergies: 'Peanuts',
-    diet: 'Low Sodium',
-    fall_precautions: 'High Risk',
-    aspiration_precautions: 'Thickened Liquids',
-    diagnoses: ['Diabetes', 'Hypertension'],
-  };
-  const carePlan = await generateCarePlan(sampleData);
+export async function POST(request: Request) {
+  const body = await request.json();
+
+  const carePlan = await generateCarePlan(body);
   return NextResponse.json({
     carePlan,
   });
