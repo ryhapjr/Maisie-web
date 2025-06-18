@@ -27,7 +27,7 @@ const LaunchPage = () => {
     'patient/Condition.read',
     'patient/AllergyIntolerance.read',
     'patient/CarePlan.read',
-    // 'launch/patient',
+    'launch/patient',
     'launch',
   ]; // Define required scopes
   const [authUrl, setAuthUrl] = useLocalstorage('authUrl', ''); // Authorization URL
