@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
       <main className='flex flex-col gap-[32px] row-start-2 items-center sm:items-start'>
+        <h1 className='text-2xl font-bold'>RNCarePlan</h1>
         <div className='flex gap-4 items-center flex-col sm:flex-row'>
           <Link
             href={`/launch?iss=https://connect.pointclickcare.com/fhir/R4/6f931546-92c8-41d6-9da4-e59cc5926726&launch=4ac46f9e-9eaa-4789-97c0-c920520abb86`}

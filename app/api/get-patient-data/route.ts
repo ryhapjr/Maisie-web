@@ -6,7 +6,7 @@ import fs from 'fs';
 
 const CERT_PATH = path.join(process.cwd(), 'cert.pem');
 
-// const KEY_PATH = path.join(process.cwd(), 'key.pem');
+const KEY_PATH = path.join(process.cwd(), 'private.pem');
 
 /**
  * @swagger
@@ -61,7 +61,7 @@ export async function GET(request: Request) {
   // const key = KEY ? Buffer.from(KEY, 'base64').toString('utf-8') : undefined;
 
   const cert = fs.readFileSync(CERT_PATH);
-  // const key = fs.readFileSync(KEY_PATH);
+  const key = fs.readFileSync(KEY_PATH);
 
   console.log('cert', cert);
   // console.log('key', key);
@@ -71,10 +71,8 @@ export async function GET(request: Request) {
 
   const httpsAgent = new https.Agent({
     cert,
-    // ca: cert,
-    // key: cert, // Use the correct key
+    key, // Use the correct key
     rejectUnauthorized: false, // Enforce certificate validation in production
-    // ca: cert, //[fs.readFileSync(CERT_PATH)],
     requestCert: true,
   });
   axios.defaults.httpAgent = httpsAgent;
