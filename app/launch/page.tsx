@@ -86,7 +86,7 @@ const LaunchPage = () => {
       const carePlan = await generateCarePlan({
         diagnoses: extractConditions(patientData?.conditions?.entry || []),
         allergies: patientData?.allergies?.entry || [],
-        carePlan: patientData?.carePlan?.entry || [],
+        // carePlan: patientData?.carePlan?.entry || [],
         resident_id: patientData?.resident_id,
       });
       console.log('carePlan', carePlan);
