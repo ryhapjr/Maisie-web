@@ -42,7 +42,7 @@ const KEY_PATH = path.join(process.cwd(), 'private.key');
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const patientId = '6f931546-92c8-41d6-9da4-e59cc5926726-117439'; //searchParams.get('patientId');
+  const patientId = searchParams.get('patientId');
   const accessToken = searchParams.get('accessToken');
   let iss = searchParams.get('iss');
 

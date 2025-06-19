@@ -2,7 +2,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 import { SCOPES } from './constants';
 
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
+const CLIENT_ID = process.env.NEXT_PUBLIC_PCC_CLIENT_ID;
 
 export const decodeIdToken = async (token: string) => {
   const { data } = await axios.post('/api/decode-id-token', { token });
@@ -30,6 +30,8 @@ export const initiateSmartLaunch = async (
 
   setTokenUrl(tokenUrl);
 
+  console.log({ CLIENT_ID });
+
   // Construct the authorization URL
   const launchParams = {
     response_type: 'code',
@@ -43,6 +45,8 @@ export const initiateSmartLaunch = async (
   };
 
   const authRedirectUrl = `${authUrl}?${queryString.stringify(launchParams)}`;
+
+  console.log('authRedirectUrl', authRedirectUrl);
 
   window.location.href = authRedirectUrl; // Redirect to PCC authorization
 };
@@ -62,6 +66,7 @@ export const exchangeCodeForToken = async (
     const tokenResponse = await axios.post('/api/get-token', {
       code,
       tokenUrl,
+      clientId: CLIENT_ID,
     });
 
     const tokenData = tokenResponse.data;

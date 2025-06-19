@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/popover';
 import { ALIGN_OPTIONS } from '@radix-ui/react-popper';
 import axios from 'axios';
+import { extractPatientNames } from '@/lib/extractor';
 
 export type ComboBoxItem = {
   value: string;
@@ -51,10 +52,12 @@ export function ApiComboBox({
 
   const fetchItems = (e: string) => {
     axios
-      .get(url + '?search=' + e)
+      .get(url + '&search=' + e)
       .then((res) => res.data)
       .then((v) => {
         console.log('v', v);
+
+        const patients = extractPatientNames(v?.entry || []);
 
         // if (
         //   selectedItem.value &&
@@ -63,7 +66,7 @@ export function ApiComboBox({
         // ) {
         //   v.unshift(selectedItem);
         // }
-        setItems(v);
+        setItems(patients);
       })
       .catch((err) => {
         setItems([selectedItem]);
