@@ -2,7 +2,7 @@ export const SCOPES = [
   'openid',
   'fhirUser',
   'profile',
-  'patient/*.cruds',
+  'patient/*.*',
   'launch/patient',
   'launch',
 ]; // Define required scopes
