@@ -6,7 +6,7 @@ export const SCOPES = [
   'patient/Observation.read',
   'patient/Condition.read',
   'patient/AllergyIntolerance.read',
-  'patient/CarePlan.read',
+  'patient/CarePlan.cruds',
   'launch/patient',
   'launch',
 ]; // Define required scopes
